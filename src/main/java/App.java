@@ -177,7 +177,7 @@ public class App {
                 chatsByParticipant.forEach((participant, chats) -> {
                     chats.sort(Comparator.comparing(c -> c.timestamp));
                     
-                    boolean isSpam = detectSpamPattern(chats, 3, 1);
+                    boolean isSpam = detectSpamPattern(chats, 2, 1);
                     double spamScore = calculateSpamScore(chats);
                     
                     scores.add(new ParticipantScore(participant, chats.size(), isSpam, spamScore));
@@ -284,10 +284,10 @@ public class App {
 
         double spamScore = calculateSpamScore(chats);
         
-        if (spamScore >= 60) {
+        if (spamScore >= 15) {
             return true;
         }
-        if (spamScore < 50) return false; 
+        if (spamScore < 7) return false; 
         
         if (chats.size() >= threshold) {
             for (int i = 0; i <= chats.size() - threshold; i++) {
